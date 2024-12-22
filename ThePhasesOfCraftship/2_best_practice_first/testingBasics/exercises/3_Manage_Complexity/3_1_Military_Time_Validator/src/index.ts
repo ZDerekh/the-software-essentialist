@@ -1,5 +1,7 @@
 const getHour = (time: string) => parseInt(time.split(':')[0]);
 const getMinute = (time: string) => parseInt(time.split(':')[1]);
+const isValidHour = (hour: number) => hour < 24;
+const isValidMinute = (minute: number) => minute < 60;
 
 export default function validateMilitaryTime(timeRange: string): boolean {
     const isRange = timeRange.includes(' - ');
@@ -16,6 +18,8 @@ export default function validateMilitaryTime(timeRange: string): boolean {
     const endHour = getHour(endTime);
     const endMinute = getMinute(endTime);
 
-    return startHour < 24 && startMinute < 60 && endHour < 24 && endMinute < 60;
+    const isValidTime = isValidHour(startHour) && isValidMinute(startMinute) && isValidHour(endHour) && isValidMinute(endMinute);
+
+    return isValidTime;
 
 }
