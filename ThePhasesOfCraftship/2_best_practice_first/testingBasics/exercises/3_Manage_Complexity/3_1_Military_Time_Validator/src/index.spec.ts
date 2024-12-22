@@ -31,4 +31,14 @@ describe('military time validator', () => {
 
         expect(output).toBe(expected);
     });
+
+    it.each([
+        ['09:82 - 07:32', false],
+        ['23:12 - 00:01', false],
+        ['13:12 - 04:12', false],
+    ])('knows what that start time should be before end time in range %s', (timeRange, expected) => {
+        const output = validateMilitaryTime(timeRange);
+
+        expect(output).toBe(expected);
+    });
 })

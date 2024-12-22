@@ -19,7 +19,8 @@ export default function validateMilitaryTime(timeRange: string): boolean {
     const endMinute = getMinute(endTime);
 
     const isValidTime = isValidHour(startHour) && isValidMinute(startMinute) && isValidHour(endHour) && isValidMinute(endMinute);
+    const isStartBeforeEnd = startHour < endHour || (startHour === endHour && startMinute < endMinute);
 
-    return isValidTime;
+    return isValidTime && isStartBeforeEnd;
 
 }
