@@ -6,6 +6,7 @@ describe('military time validator', () => {
         ['01:12/14:32', false],
         ['01:12, 14:32', false],
         ['01:12 14:32', false],
+        ['01:12-14:32', true],
     ])('knows what that the range should be separated by a `-`', (timeRange, expected) => {
         const output = validateMilitaryTime(timeRange);
 

@@ -4,8 +4,8 @@ const isValidHour = (hour: number) => hour < 24;
 const isValidMinute = (minute: number) => minute < 60;
 
 export default function validateMilitaryTime(timeRange: string): boolean {
-    const isRange = timeRange.includes(' - ');
-    const range = timeRange.split(' - ');
+    const isRange = timeRange.includes('-');
+    const range = timeRange.split('-');
     const hasTwoTimes = range.length === 2;
 
     if(!isRange && !hasTwoTimes) return false;
