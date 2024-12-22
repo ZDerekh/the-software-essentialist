@@ -21,4 +21,14 @@ describe('military time validator', () => {
 
         expect(output).toBe(expected);
     });
+
+    it.each([
+        ['09:82 - 14:32', false],
+        ['01:12 - 52:32', false],
+        ['13:12 - 14:72', false],
+    ])('knows what that the max hour is 23 and the max minute is 59 in range %s', (timeRange, expected) => {
+        const output = validateMilitaryTime(timeRange);
+
+        expect(output).toBe(expected);
+    });
 })
