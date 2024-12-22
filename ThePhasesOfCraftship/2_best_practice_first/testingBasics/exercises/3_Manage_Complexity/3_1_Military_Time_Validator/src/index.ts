@@ -1,7 +1,9 @@
-function hasTimeRangeFormat(timeRange: string): boolean {
-    return timeRange.includes('-');
-}
+
 
 export default function validateMilitaryTime(timeRange: string): boolean {
-    return hasTimeRangeFormat(timeRange);
+    const hasRange = timeRange.includes(' - ');
+
+    if(!hasRange) return false;
+
+    return timeRange.split(' - ').length === 2;
 }
