@@ -15,6 +15,10 @@ export default function calculateStats(sequence: number[]):CalculatedStats {
         if (value < min) {
             min = value;
         }
+
+        if (value > max) {
+            max = value;
+        }
     }
     
     return {
