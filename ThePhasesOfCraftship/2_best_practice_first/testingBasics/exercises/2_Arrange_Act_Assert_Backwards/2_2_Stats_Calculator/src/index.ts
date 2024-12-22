@@ -9,7 +9,7 @@ export default function calculateStats(sequence: number[]):CalculatedStats {
     let min = sequence[0];
     let max = sequence[0];
     let count = 0;
-    let avg = 0;
+    let sum = 0;
 
     for (const value of sequence) {
         if (value < min) {
@@ -19,12 +19,15 @@ export default function calculateStats(sequence: number[]):CalculatedStats {
         if (value > max) {
             max = value;
         }
+
+        count++;
+        sum += value;
     }
     
     return {
         min,
         max,
         count,
-        avg,
+        avg: sum / count,
     }
 }
