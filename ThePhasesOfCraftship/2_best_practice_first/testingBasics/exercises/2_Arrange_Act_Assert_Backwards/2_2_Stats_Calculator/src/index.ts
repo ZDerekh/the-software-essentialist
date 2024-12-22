@@ -6,8 +6,8 @@ export type CalculatedStats = {
 }
 
 export default function calculateStats(sequence: number[]):CalculatedStats {
-    let min = sequence[0];
-    let max = sequence[0];
+    let min = sequence[0] ?? 0;
+    let max = sequence[0] ?? 0;
     let count = 0;
     let sum = 0;
 
@@ -28,6 +28,6 @@ export default function calculateStats(sequence: number[]):CalculatedStats {
         min,
         max,
         count,
-        avg: sum / count,
+        avg: sum / count || 0,
     }
 }

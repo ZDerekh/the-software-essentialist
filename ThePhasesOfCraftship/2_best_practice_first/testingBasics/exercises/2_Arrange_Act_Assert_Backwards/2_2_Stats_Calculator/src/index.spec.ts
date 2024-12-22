@@ -32,4 +32,15 @@ describe('stats calculator', () => {
 
         expect(output.count).toBe(6)
     })
+
+    it('should know how to calculate the stats of an empty sequence', () => {
+        const sequence: number[] = [];
+
+        const output = calculateStats(sequence);
+
+        expect(output.count).toBe(0)
+        expect(output.min).toBe(0)
+        expect(output.max).toBe(0)
+        expect(output.avg).toBe(0)
+    })
 })
