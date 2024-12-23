@@ -38,4 +38,19 @@ describe('boolean calculator', () => {
 
         expect(result).toBe(expected);
     });
+
+        
+    it.each([
+        ['TRUE AND TRUE OR TRUE', true],
+        ['TRUE AND FALSE OR TRUE', true],
+        ['FALSE AND TRUE OR TRUE', true],
+        ['FALSE AND FALSE OR TRUE', true],
+        ['FALSE AND FALSE OR FALSE', false],
+        ['TRUE OR TRUE OR TRUE AND FALSE', true],
+        ['TRUE OR FALSE AND NOT FALSE', true],
+    ])('should know how to handle OR (%s) to resolve to %s', (input, expected) => {
+        const result = booleanCalculator(input);
+
+        expect(result).toBe(expected);
+    });
 });
