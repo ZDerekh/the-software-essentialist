@@ -16,4 +16,15 @@ describe('boolean calculator', () => {
 
         expect(result).toBe(expected);
     });
+
+    it.each([
+        ['TRUE AND TRUE', true],
+        ['TRUE AND FALSE', false],
+        ['FALSE AND TRUE', false],
+        ['FALSE AND FALSE', false],
+    ])('should know how to handle AND (%s) to resolve to %s', (input, expected) => {
+        const result = booleanCalculator(input);
+
+        expect(result).toBe(expected);
+    });
 });
