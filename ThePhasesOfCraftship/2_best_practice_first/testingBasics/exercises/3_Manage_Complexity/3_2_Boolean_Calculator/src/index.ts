@@ -1,10 +1,10 @@
 
 function isTrue(input: string): boolean {
-    return input.includes('FALSE')!== true;    
+    return input === 'TRUE' || input !== 'FALSE';
 }
 
 function hasMultipleStatements(input: string): boolean {
-    return input.includes('AND') || input.includes('OR');
+    return input.includes(' AND ') || input.includes(' OR ');
 }
 
 export default function booleanCalculator(input: string): boolean {
@@ -13,7 +13,7 @@ export default function booleanCalculator(input: string): boolean {
     const hasOrs = input.includes('OR');
 
     if (hasNot) {
-        const [_, right] = input.split('NOT');
+        const [_, right] = input.split('NOT ');
 
         if (hasMultipleStatements(right)) {
             return !booleanCalculator(right);
@@ -21,8 +21,9 @@ export default function booleanCalculator(input: string): boolean {
         
         return !isTrue(right);
     }
+
     if (hasAnds) {
-        const [left, right] = input.split('AND');
+        const [left, right] = input.split(' AND ');
 
         if (hasMultipleStatements(right)) {
             return booleanCalculator(right);
@@ -36,7 +37,7 @@ export default function booleanCalculator(input: string): boolean {
     }
 
     if (hasOrs) {
-        const [left, right] = input.split('OR');
+        const [left, right] = input.split(' OR ');
 
         if (hasMultipleStatements(right)) {
             return booleanCalculator(right);
@@ -48,7 +49,6 @@ export default function booleanCalculator(input: string): boolean {
 
         return isTrue(left) || isTrue(right);
     }
-
-
+    
     return isTrue(input);
 }
