@@ -27,41 +27,45 @@ export default function booleanCalculator(input: string): boolean {
     }
 
     if (hasNot) {
-        const [_, right] = input.split('NOT ');
+        const conditions = input.split('NOT ');
 
-        if (hasMultipleStatements(right)) {
-            return !booleanCalculator(right);
+        if (hasMultipleStatements(conditions[1])) {
+            return !booleanCalculator(conditions[1]);
         }
         
-        return !isTrue(right);
+        return !isTrue(conditions[1]);
     }
 
     if (hasAnds) {
-        const [left, right] = input.split(' AND ');
+        const conditions = input.split(' AND ');
+        let result = true;
 
-        if (hasMultipleStatements(right)) {
-            return booleanCalculator(right);
+
+
+        for(const condition of conditions) {
+            if(hasMultipleStatements(condition)) {
+                return booleanCalculator(condition);
+            }
+
+            result = result && isTrue(condition);
         }
 
-        if (hasMultipleStatements(left)) {
-            return booleanCalculator(left);
-        }
-
-        return isTrue(left) && isTrue(right);
+        return result;
     }
 
     if (hasOrs) {
-        const [left, right] = input.split(' OR ');
+        const conditions = input.split(' OR ');
+        let result = false;
 
-        if (hasMultipleStatements(right)) {
-            return booleanCalculator(right);
+        for(const condition of conditions) {
+            if(hasMultipleStatements(condition)) {
+                return booleanCalculator(condition);
+            }
+
+            result = result || isTrue(condition);
         }
 
-        if (hasMultipleStatements(left)) {
-            return booleanCalculator(left);
-        }
-
-        return isTrue(left) || isTrue(right);
+        return result;
     }
 
     return isTrue(input);
