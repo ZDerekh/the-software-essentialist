@@ -53,4 +53,14 @@ describe('boolean calculator', () => {
 
         expect(result).toBe(expected);
     });
+
+    it.each([
+        ['(TRUE OR TRUE OR TRUE) AND FALSE', false],
+        ['NOT (TRUE AND TRUE)', false],
+        ['NOT ((FALSE AND (FALSE OR FALSE)) OR TRUE)', false],
+    ])('should know how to handle parentheses (%s) to resolve to %s', (input, expected) => {
+        const result = booleanCalculator(input);
+
+        expect(result).toBe(expected);
+    });
 });

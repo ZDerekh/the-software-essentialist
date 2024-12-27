@@ -11,6 +11,20 @@ export default function booleanCalculator(input: string): boolean {
     const hasNot = input.includes('NOT');
     const hasAnds = input.includes('AND');
     const hasOrs = input.includes('OR');
+    const hasParentheses = input.includes('(');
+
+    if (hasParentheses) {
+        const start = input.indexOf('(');
+        const end = input.lastIndexOf(')');
+
+        const inner = input.slice(start + 1, end);
+        const result = booleanCalculator(inner);
+
+     
+        input = input.replace(`(${inner})`, result ? 'TRUE' : 'FALSE');
+        
+        return booleanCalculator(input);
+    }
 
     if (hasNot) {
         const [_, right] = input.split('NOT ');
@@ -49,6 +63,6 @@ export default function booleanCalculator(input: string): boolean {
 
         return isTrue(left) || isTrue(right);
     }
-    
+
     return isTrue(input);
 }
